@@ -26,22 +26,22 @@ public class RequestController {
     @RequestMapping(value="/start", method=RequestMethod.POST, produces="application/json")
     public StartResponse start(@RequestBody StartRequest request) {
         return new StartResponse()
-                .setName("Simple Snake")
-                .setColor("#FF3497")
-                .setHeadUrl("http://vignette1.wikia.nocookie.net/nintendo/images/6/61/Bowser_Icon.png/revision/latest?cb=20120820000805&path-prefix=en")
-                .setHeadType(HeadType.DEAD)
+                .setName("Python3")
+                .setColor("#CC00CC")
+                .setHeadUrl("https://findicons.com/files/icons/1316/futurama_vol_1/256/bender.png")
+                .setHeadType(HeadType.BENDR)
                 .setTailType(TailType.PIXEL)
-                .setTaunt("I can find food!");
+                .setTaunt("Viper that smirk off your face");
     }
 
     @RequestMapping(value="/move", method=RequestMethod.POST, produces = "application/json")
     public MoveResponse move(@RequestBody MoveRequest request) {
         MoveResponse moveResponse = new MoveResponse();
-        
+
         Snake mySnake = findOurSnake(request); // kind of handy to have our snake at this level
-        
+
         List<Move> towardsFoodMoves = moveTowardsFood(request, mySnake.getCoords()[0]);
-        
+
         if (towardsFoodMoves != null && !towardsFoodMoves.isEmpty()) {
             return moveResponse.setMove(towardsFoodMoves.get(0)).setTaunt("I'm hungry");
         } else {
@@ -58,7 +58,7 @@ public class RequestController {
 
     /*
      *  Go through the snakes and find your team's snake
-     *  
+     *
      *  @param  request The MoveRequest from the server
      *  @return         Your team's snake
      */
@@ -71,11 +71,11 @@ public class RequestController {
 
     /*
      *  Simple algorithm to find food
-     *  
+     *
      *  @param  request The MoveRequest from the server
      *  @param  request An integer array with the X,Y coordinates of your snake's head
      *  @return         A Move that gets you closer to food
-     */    
+     */
     public ArrayList<Move> moveTowardsFood(MoveRequest request, int[] mySnakeHead) {
         ArrayList<Move> towardsFoodMoves = new ArrayList<>();
 
